@@ -41,8 +41,9 @@ SSID="wifi_ssid";
 ```
 Enter path to `keepmdmalive.sh` in the `keepmdmalive.service` file and then move it to `/etc/systemd/system/`
 ```
-sed -i.bck "s~ExecStart=.*\.sh$~ExecStart=$(readlink -e keepmdmalive.sh)~;" keepmdmalive/keepmdmalive.service
-sudo mv keepmdmalive/keepmdmalive.service /etc/systemd/system/
+cd keepmdmalive
+sed -i.bck "s~ExecStart=.*\.sh$~ExecStart=$(readlink -e keepmdmalive.sh)~;" keepmdmalive.service
+sudo mv keepmdmalive.service /etc/systemd/system/
 ```
 Enable service and start it
 ```
