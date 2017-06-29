@@ -1,0 +1,10 @@
+[Unit]
+Description= Watches modem status, and reconnect or reboot it when connection is down.
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+ExecStart=/path/to/keepmdmalive.sh
+
+[Install]
+WantedBy=multi-user.target
