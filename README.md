@@ -5,25 +5,29 @@ connections alive.
 
 I have an old type of this modem in home and one of its power circuit capacitors leaks,
 so modem loose connection on high loads. So I wrote this simple service script to watch
-modem status and request to connect when link is down and restart modem when connect not
-work. it works for me :)
+modem status and request to connect when link is down and restart modem when connect request 
+does not work. it works for me :)
+
 It is distributed in the hope that it will be useful to or inspire someone.
 
 ## Applications
 
-Currently this script doesn't support any other kind of devices.
+Currently this script doesn't support any kind device other than Linksys WAG54G2 which
+is a ADSL wireless modem router.
 If you have device with similar web interface, this should work for you either!
-It configured to automatically work in linux systems with `bash` and `systemd` init systems. 
-but should work on any `bash` implementations, if you manage a manual/automatic way to run.
+It configured to automatically work in linux systems with `bash` and `systemd` init system. 
+but should work on any `bash` implementations, if you manage a manual/automatic way to run 
+the script.
 
 ## Installation
 
 Put both `keepmdmalive.sh` and `.mdmReset` in a directory and make `keepmdmalive.sh` executable,
 ```
-git clone https://github.com/2i3r/keepmdmalive
+git clone https://github.com/2i3r/keepmdmalive.git
 cd keepmdmalive
+chmod +x keepmdmalive.sh
 ```
-Replace configs in `keepmdmalive.sh` file with your info, such as username and password of web interface in `AUTH`, router ip address in `RouterIP`, any ip to check connection in `IP` (gateway or DNS address of internet provider is best choice) and SSID of your wireless network in `SSID`
+Replace configs in `keepmdmalive.sh` file with your info, such as username and password of device web interface in `AUTH`, router local ip address in `RouterIP`, any ip to check connection in `IP` (gateway or DNS address of internet provider is best choice) and SSID of your wireless network in `SSID`
 > keepmdmalive.sh 4,8
 ```
 ...
@@ -36,7 +40,7 @@ SSID="wifi_ssid";
 ```
 Enter path to `keepmdmalive.sh` in the `keepmdmalive.service` file and then move it to `/etc/systemd/system/`
 ```
-sed "s~ExecStart=.*\.sh$~ExecStart=$(realpath keepmdmalive.sh)~;" keepmdmalive.service
+sed "s~ExecStart=.*\.sh$~ExecStart=$(readlink -e keepmdmalive.sh)~;" keepmdmalive.service
 sudo mv keepmdmalive.service /etc/systemd/system/
 ```
 Enable service and start it
