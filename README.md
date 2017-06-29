@@ -25,8 +25,8 @@ Put both `keepmdmalive.sh` and `.mdmReset` in a directory (preferably ~) and mak
 ```
 cd ~
 git clone https://github.com/2i3r/keepmdmalive.git
-chmod +x keepmdmalive/keepmdmalive.sh
 mv keepmdmalive/{keepmdmalive.sh,.mdmReset} .
+chmod +x keepmdmalive.sh
 ```
 Replace configs in `keepmdmalive.sh` file with your info, such as username and password of device web interface in `AUTH`, router local ip address in `RouterIP`, any ip to check connection in `IP` (gateway or DNS address of internet provider is best choice) and SSID of your wireless network in `SSID`
 > keepmdmalive.sh 4,8
@@ -42,7 +42,7 @@ SSID="wifi_ssid";
 Enter path to `keepmdmalive.sh` in the `keepmdmalive.service` file and then move it to `/etc/systemd/system/`
 ```
 cd keepmdmalive
-sed -i.bck "s~ExecStart=.*\.sh$~ExecStart=$(readlink -e keepmdmalive.sh)~;" keepmdmalive.service
+sed -i.bck "s~ExecStart=.*\.sh$~ExecStart=$(readlink -e ../keepmdmalive.sh)~;" keepmdmalive.service
 sudo mv keepmdmalive.service /etc/systemd/system/
 ```
 Enable service and start it
