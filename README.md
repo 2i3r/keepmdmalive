@@ -21,11 +21,12 @@ the script.
 
 ## Installation
 
-Put both `keepmdmalive.sh` and `.mdmReset` in a directory and make `keepmdmalive.sh` executable,
+Put both `keepmdmalive.sh` and `.mdmReset` in a directory (preferably ~) and make `keepmdmalive.sh` executable,
 ```
 git clone https://github.com/2i3r/keepmdmalive.git
 cd keepmdmalive
 chmod +x keepmdmalive.sh
+mv keepmdmalive.sh .mdmReset ~/
 ```
 Replace configs in `keepmdmalive.sh` file with your info, such as username and password of device web interface in `AUTH`, router local ip address in `RouterIP`, any ip to check connection in `IP` (gateway or DNS address of internet provider is best choice) and SSID of your wireless network in `SSID`
 > keepmdmalive.sh 4,8
